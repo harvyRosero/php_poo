@@ -22,10 +22,10 @@ CREATE TABLE movieseries (
       poster VARCHAR(150) DEFAULT 'no-poster.jpg',
       trailer VARCHAR(150) DEFAULT 'no-trailer.jpg',
       raiting DECIMAL(2,1), 
-      genero VARCHAR(50) NOT NULL, 
+      genre VARCHAR(50) NOT NULL, 
       status INTEGER UNSIGNED NOT NULL,
       category ENUM('Movie', 'Serie') NOT NULL,
-      FULLTEXT KEY search(title, author, actors),
+      FULLTEXT KEY search(title, author, actors, genre),
       FOREIGN KEY (status) REFERENCES status(status_id) ON DELETE RESTRICT ON UPDATE CASCADE 
 );
 
@@ -33,10 +33,10 @@ CREATE TABLE movieseries (
 CREATE TABLE users(
       user VARCHAR(20) PRIMARY KEY,
       email VARCHAR(80) UNIQUE NOT NULL,
-      nombre VARCHAR(100) NOT NULL,
+      name VARCHAR(100) NOT NULL,
       birthday DATE NOT NULL,
       pass CHAR(32) NOT NULL,
-      rol ENUM('Admin', 'User') NOT NULL
+      role ENUM('Admin', 'User') NOT NULL
 );
 
 -- 'Coming Soon', 'release', 'In Issue', 'Finished', 'Canceled'
@@ -47,13 +47,13 @@ INSERT INTO status(status_id, status) VALUES
 (4, 'Finished'),
 (5, 'Canceled');
 
-INSERT INTO users (user, email, nombre, birthday, pass, rol) VALUES
+INSERT INTO users (user, email, name, birthday, pass, role) VALUES
 ('@harvy', 'harvy@gmail.com', 'harvy rosero', '2000-04-27', MD5('zantiago316'), 'Admin'),
 ('@juan', 'juan@gmail.com', 'juan mortal', '2000-03-12', MD5('juan123'), 'User');
 
 
 INSERT INTO movieseries (imdb_id, title, plot, author, actors, country, premiere, poster, trailer, raiting, 
-      genero, status, category) VALUES
+      genre, status, category) VALUES
       ('tt0987651', 
       'Rocky Balboa', 
       'Thirty years afyter the ring of the first bell, Rocky comes out 
