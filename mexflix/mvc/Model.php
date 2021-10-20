@@ -40,7 +40,7 @@ abstract class Model {
         $this->conn->close();
     }
 
-    // establecer un query simple (INSERT DELETE IPDATE)
+    // establecer un query simple (INSERT DELETE UPDATE)
     protected function set_query(){
         $this->db_open();
         $this->conn->query($this->query);
@@ -55,7 +55,7 @@ abstract class Model {
         $result->close();
         $this->db_close();
 
-        return $this->rows;
+        return array_pop($this->rows);
     }
 }
 
